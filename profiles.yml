@@ -3,7 +3,7 @@ avances_salaires:
   outputs: 
     dev: 
       type: duckdb
-      path: wharehouse/avances.duckdb
+      path: warehouse/avances.duckdb
       threads: 4
       extensions:
         - excel

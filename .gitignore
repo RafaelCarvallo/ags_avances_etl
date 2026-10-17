@@ -1,5 +1,6 @@
 .venv/
-data/*
-warehouse/*
-logs/*
+data/
+warehouse/
+logs/
 .user.yml
+dbt_packages/
