@@ -1,0 +1,26 @@
+name : avances_salaires
+version : '1.0.0'
+profile : avances_salaires
+
+model-paths : ["models"]
+macro-paths : ["macros"]
+seed-paths : ["seeds"]
+test-paths : ["test"]
+
+vars:
+  flux_date: null
+  raw_path: raw/data
+
+models:
+  avances_salaires:
+    bronze:
+      +schema: bronze
+      +materialized: incremental
+      +incremental_strategy: delete+insert
+      +unique_key: _date_flux
+      +full_refresh: false
+      +on_schema_change: fail
+
+seeds:
+  avances_salaires:
+    +schema: config
