@@ -1,22 +1,15 @@
-{% macro charger_flux_excel(source, colonnes)%}
+{% macro charger_flux_excel(nom_flux, colonnes)%}
 
 {#- Charge <raw_chemin>/<date_flux>/<source>.xlsx si il existe -#}
 
-{%- set date_flux = var('date_flux') -%}
-{%- if execute and date_flux is none -%}
-    {{exceptions.raise_compiler_error("Variable date_flux obligatoire pour charger le flux")}}
-{%- endif   -%}
-{%- set chemin = var('raw_chemin') ~ '/' ~ date_flux ~ '/' ~ source ~ '.xlsx' -%}
+{%- set date_flux = flux_date_courante() -%}
 
-{%- set fichier_present = false -%}
+{%- set chemin = chemin_flux(nom_flux) -%}
+
+{%- set fichier_present = fichier_existe(chemin) -%}
 {%- if execute -%}
-    {%- set fichier_present = run_query("SELECT COUNT(*) 
-                                      FROM GLOB('"~ chemin ~"')").columns[0].values()[0] > 0
-    -%}
-    {{ log(source ~ " @ " ~ date_flux ~ " : " ~ ("fichier trouvé" if fichier_present else "aucun fichier, pas de chargement"), 
-           info=true)}}
-{%- endif -%}
-
+    {{ log(nom_flux ~ " @ " ~ date_flux ~ " : " ~ ("fichier trouvé : " ~ chemin if fichier_present else "aucun fichier : " ~ chemin), info=true) }}
+{%- endif %}
 select
 {%- for col in colonnes %}
     cast(src."{{ col }}" as varchar) AS "{{ col }}",
