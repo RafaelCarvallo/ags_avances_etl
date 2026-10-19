@@ -4,3 +4,4 @@ warehouse/
 logs/
 .user.yml
 dbt_packages/
+target/

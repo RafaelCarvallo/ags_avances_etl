@@ -8,8 +8,8 @@ seed-paths : ["seeds"]
 test-paths : ["test"]
 
 vars:
-  flux_date: null
-  raw_path: raw/data
+  date_flux: null
+  raw_chemin: data/raw
 
 models:
   avances_salaires:
@@ -20,7 +20,3 @@ models:
       +unique_key: _date_flux
       +full_refresh: false
       +on_schema_change: fail
-
-seeds:
-  avances_salaires:
-    +schema: config
