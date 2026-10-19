@@ -1,0 +1,1 @@
+{{ charger_flux_excel('demandes_avance', ['ref_demande_avance', 'ref_salarie', 'rang_creance', 'montant_demande', 'date_reception']) }}

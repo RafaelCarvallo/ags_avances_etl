@@ -1,0 +1,1 @@
+{{ charger_flux_excel('salaries', ['ref_salarie', 'nni', 'nom', 'prénom', 'RIB']) }}

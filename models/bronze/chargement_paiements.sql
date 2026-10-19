@@ -1,0 +1,1 @@
+{{ charger_flux_excel('paiements', ['ref_paiement', 'ref_salarie', 'ref_demande_avance', 'montant_paye', 'rib_salarie', 'date_paiement']) }}
