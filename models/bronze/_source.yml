@@ -1,0 +1,12 @@
+sources:
+  - name: audit
+    schema: main_bronze
+    tables:
+      - name: journal_chargements
+        description : Journal des chargements des données dans la couche bronze, une ligne par modèle par run
+        columns:
+          - name: statut
+            data_tests:
+              - accepted_values:
+                  arguments:
+                    values: ['success', 'error', 'skipped']
