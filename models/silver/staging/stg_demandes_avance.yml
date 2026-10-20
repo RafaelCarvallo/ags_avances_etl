@@ -1,0 +1,40 @@
+models:
+  - name: stg_demandes_avance
+    description : Les demandes d'avances sont typées et normalisées avec une seul ligne par demande et par flux
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [ref_demande_avance, _date_flux]
+      - dbt_utils.expression_is_true: 
+          arguments:
+            expression: "date_reception <= _date_flux"
+      
+    columns:
+      - name: ref_demande_avance
+        data_tests: [not_null]
+      
+      - name: ref_salarie
+        data_tests: [not_null]
+
+      - name: rang_creance
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["Super privilège"]
+              config:
+                severity: warn
+
+      - name: montant_demande
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: false
+
+      - name: date_reception
+        data_tests: [not_null]
+      
+      - name: _hash_ligne
+        data_tests: [not_null]
+      
